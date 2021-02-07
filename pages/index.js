@@ -4,6 +4,7 @@ import { Button, Container } from 'react-bootstrap'
 import CreateUserForm from '../components/CreateUserForm'
 import UsersTable from '../components/UsersTable'
 import { useQuery } from 'react-query'
+import InputMask from 'react-input-mask';
 
 const getRollingRetention = () => fetch(`${ process.env.NEXT_PUBLIC_API_URL }/users/rollingRetention`).then((res) => res.json())
 
@@ -22,9 +23,9 @@ export default function Home() {
           <h2 className="mb-4">Добавить пользователя</h2>
           <CreateUserForm />
 
-          <Button className="mt-5" onClick={ fetchRollingRetention } variant="primary" type="button">Рассчитать</Button>
+          <Button className="mt-5" onClick={ fetchRollingRetention } variant="primary" type="button">Calculate</Button>
           { rollingRetention && (
-            <div className={ styles.retentionText }>Rolling Retention 7 day: { rollingRetention.rollingRetention }</div>
+            <div className={ styles.retentionText }>Rolling Retention 7 day: { rollingRetention.rollingRetention * 100 }%</div>
           ) }
 
           <h2 className="mt-5">Пользователи</h2>
